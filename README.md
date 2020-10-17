@@ -20,7 +20,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <!--ts-->
   * Express
   * Node JS
-  * Instalação
+  * React
 <!--te-->
 
 ### Pré-requisitos
