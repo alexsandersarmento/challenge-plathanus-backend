@@ -2,17 +2,17 @@ const knex = require('../database');
 
 module.exports = {
     async index(req, res) {
-        const results = await knex('services');
+        const results = await knex('backgrounds');
 
         return res.json(results);
     },
 
     async show(req, res) {
         try {
-            const { id } = req.params;
+            const { key } = req.params;
 
-            const result = await knex('services')
-                .where({ id })
+            const result = await knex('backgrounds')
+                .where({ key })
 
             return res.send(result);
         } catch (error) {
@@ -23,13 +23,14 @@ module.exports = {
     async create(req, res, next) {
 
         try {
-            const { title, description } = req.body;
+            const {key } = req.body;
             const { filename } = req.file;
 
             const url = `http://localhost:3333/files/${filename}`;
 
-            await knex('services').insert({
-                image: url, title, description,
+            await knex('backgrounds').insert({
+                image: url,
+                key
             });
 
             return res.status(201).send()
@@ -40,28 +41,27 @@ module.exports = {
 
     async update(req, res, next) {
         try {
-            const { title, description } = req.body;
             const { filename } = req.file;
             const { id } = req.params;
 
             const url = `http://localhost:3333/files/${filename}`;
 
             await knex('services')
-                .update({ image: url, title, description })
+                .update({ image: url })
                 .where({ id });
 
             return res.send();
 
         } catch (error) {
             next(error);
-        };
+        }
     },
 
     async delete(req, res, next) {
         try {
             const { id } = req.params;
 
-            await knex('services')
+            await knex('backgrounds')
                 .delete()
                 .where({ id })
 
