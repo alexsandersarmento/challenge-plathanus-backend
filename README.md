@@ -44,8 +44,8 @@ $ yarn install
 # Execute as migrations
 $ npx knex migrate:latest
 
-#Execute os seeds
-$npx knex seed:run
+# Execute os seeds
+$ npx knex seed:run
 
 # Execute a aplicação 
 $ yarn start
