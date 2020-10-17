@@ -40,14 +40,12 @@ module.exports = {
 
     async update(req, res, next) {
         try {
-            const { title, description } = req.body;
-            const { filename } = req.file;
+            const { image, title, description } = req.body;
             const { id } = req.params;
 
-            const url = `http://localhost:3333/files/${filename}`;
 
             await knex('services')
-                .update({ image: url, title, description })
+                .update({ image, title, description })
                 .where({ id });
 
             return res.send();
